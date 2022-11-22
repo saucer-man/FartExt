@@ -38,6 +38,9 @@
 #include "unstarted_runtime.h"
 
 namespace art {
+//add 
+extern "C" bool ShouldUnpack();
+//add end
 namespace interpreter {
 //add
 extern "C" void dumpdexfilebyExecute(ArtMethod* artmethod);
@@ -512,10 +515,25 @@ void EnterInterpreterFromInvoke(Thread* self,
     }
   }
   if (LIKELY(!method->IsNative())) {
-    JValue r = Execute(self, accessor, *shadow_frame, JValue(), stay_in_interpreter);
-    if (result != nullptr) {
-      *result = r;
+    //add
+    if(result!=nullptr&&result->GetI()==111111){
+        JValue r = Execute(self, accessor, *shadow_frame, *result, stay_in_interpreter);
+        if (result != nullptr) {
+          *result = r;
+        }
+        LOG(ERROR) << "fartext Execute over"<<method->PrettyMethod().c_str();
+        return;
+    }else{
+        JValue r = Execute(self, accessor, *shadow_frame, JValue(), stay_in_interpreter);
+        if (result != nullptr) {
+          *result = r;
+        }
     }
+    //add end
+    // JValue r = Execute(self, accessor, *shadow_frame, JValue(), stay_in_interpreter);
+    // if (result != nullptr) {
+    //   *result = r;
+    // }
   } else {
     // We don't expect to be asked to interpret native code (which is entered via a JNI compiler
     // generated stub) except during testing and image writing.
