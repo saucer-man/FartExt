@@ -765,6 +765,12 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
           self, this, receiver, args + 1, result, /*stay_in_interpreter=*/ true);
     }
   } else {
+    //add
+    if (result!=nullptr && result->GetI()==111111){
+        LOG(ERROR) << "fartext artMethod::Invoke return Native Method "<<this->PrettyMethod().c_str();
+        return;
+    }
+    //add endss
     DCHECK_EQ(runtime->GetClassLinker()->GetImagePointerSize(), kRuntimePointerSize);
 
     constexpr bool kLogInvocationStartAndReturn = false;
