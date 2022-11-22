@@ -34,7 +34,6 @@
 #include "well_known_classes.h"
 
 namespace art {
-
 //add
 extern "C" ArtMethod* jobject2ArtMethod(JNIEnv* env, jobject javaMethod) {
   ScopedFastNativeObjectAccess soa(env);
@@ -42,7 +41,6 @@ extern "C" ArtMethod* jobject2ArtMethod(JNIEnv* env, jobject javaMethod) {
   return method;
 }
 //add end
-
 static jobject Method_getDefaultValue(JNIEnv* env, jobject javaMethod) {
   ScopedFastNativeObjectAccess soa(env);
   ArtMethod* method = ArtMethod::FromReflectedMethod(soa, javaMethod);

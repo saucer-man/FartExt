@@ -40,9 +40,6 @@
 #include "verifier/method_verifier.h"
 
 namespace art {
-
-extern "C" void dumpArtMethod(ArtMethod* artmethod);
-
 namespace interpreter {
 
 // Short-lived helper class which executes single DEX bytecode.  It is inlined by compiler.
@@ -2621,7 +2618,6 @@ class InstructionHandler {
 #undef POSSIBLY_HANDLE_PENDING_EXCEPTION_ON_INVOKE_POLYMORPHIC
 #undef HANDLE_PENDING_EXCEPTION
 
-
 // TODO On ASAN builds this function gets a huge stack frame. Since normally we run in the mterp
 // this shouldn't cause any problems for stack overflow detection. Remove this once b/117341496 is
 // fixed.
@@ -2653,7 +2649,6 @@ ATTRIBUTE_NO_SANITIZE_ADDRESS void ExecuteSwitchImplCpp(SwitchImplContext* ctx) 
   //add end
   bool const interpret_one_instruction = ctx->interpret_one_instruction;
   while (true) {
-
     dex_pc = inst->GetDexPc(insns);
     shadow_frame.SetDexPC(dex_pc);
     TraceExecution(shadow_frame, inst, dex_pc);
@@ -2699,7 +2694,7 @@ ATTRIBUTE_NO_SANITIZE_ADDRESS void ExecuteSwitchImplCpp(SwitchImplContext* ctx) 
         }
     }
     //add end
-    switch (opcode) {
+    switch (inst->Opcode(inst_data)) {
 #define OPCODE_CASE(OPCODE, OPCODE_NAME, pname, f, i, a, e, v)                                    \
       case OPCODE: {                                                                              \
         bool exit_loop = false;                                                                   \

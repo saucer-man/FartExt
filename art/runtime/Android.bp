@@ -20,8 +20,7 @@
 // (empty) body is called.
 JIT_DEBUG_REGISTER_CODE_LDFLAGS = [
     "-Wl,--keep-unique,__jit_debug_register_code",
-    "-Wl,--keep-unique,__dex_debug_register_code",
-
+    "-Wl,--keep-unique,__dex_debug_register_code"
 ]
 
 libart_cc_defaults {

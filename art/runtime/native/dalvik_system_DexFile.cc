@@ -525,8 +525,7 @@ static jobjectArray DexFile_getClassNameList(JNIEnv* env, jclass, jobject cookie
   }
   return result;
 }
-
-//addfunction 将ava的Method转换成ArtMethod。然后主动调用
+//add function 将java的Method转换成ArtMethod。然后主动调用
 static void DexFile_fartextMethodCode(JNIEnv* env, jclass,jobject method) {
   if(method!=nullptr)
   {
@@ -536,7 +535,7 @@ static void DexFile_fartextMethodCode(JNIEnv* env, jclass,jobject method) {
 
   return;
 }
-
+//add end
 static jint GetDexOptNeeded(JNIEnv* env,
                             const char* filename,
                             const char* instruction_set,

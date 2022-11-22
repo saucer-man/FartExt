@@ -94,8 +94,6 @@ extern "C" void art_quick_invoke_static_stub(ArtMethod*, uint32_t*, uint32_t, Th
 static_assert(ArtMethod::kRuntimeMethodDexMethodIndex == dex::kDexNoIndex,
               "Wrong runtime-method dex method index");
 
-
-
 ArtMethod* ArtMethod::GetCanonicalMethod(PointerSize pointer_size) {
   if (LIKELY(!IsDefault())) {
     return this;
@@ -130,6 +128,7 @@ uint8_t* codeitem_end(const uint8_t **pData)
     }
     return (uint8_t*)(*pData);
 }
+
 
 
 
@@ -487,6 +486,7 @@ extern "C" void fartextInvoke(ArtMethod* artmethod)  REQUIRES_SHARED(Locks::muta
 
 //addend
 
+
 ArtMethod* ArtMethod::GetNonObsoleteMethod() {
   if (LIKELY(!IsObsolete())) {
     return this;
@@ -755,7 +755,6 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
   if (UNLIKELY(!runtime->IsStarted() ||
                (self->IsForceInterpreter() && !IsNative() && !IsProxyMethod() && IsInvokable()) ||
                Dbg::IsForcedInterpreterNeededForCalling(self, this))) {
-
     if (IsStatic()) {
       art::interpreter::EnterInterpreterFromInvoke(
           self, this, nullptr, args, result, /*stay_in_interpreter=*/ true);
@@ -766,11 +765,8 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
           self, this, receiver, args + 1, result, /*stay_in_interpreter=*/ true);
     }
   } else {
-    if (result!=nullptr && result->GetI()==111111){
-        LOG(ERROR) << "fartext artMethod::Invoke return Native Method "<<this->PrettyMethod().c_str();
-        return;
-    }
     DCHECK_EQ(runtime->GetClassLinker()->GetImagePointerSize(), kRuntimePointerSize);
+
     constexpr bool kLogInvocationStartAndReturn = false;
     bool have_quick_code = GetEntryPointFromQuickCompiledCode() != nullptr;
     if (LIKELY(have_quick_code)) {
