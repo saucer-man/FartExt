@@ -40,6 +40,9 @@
 #include "verifier/method_verifier.h"
 
 namespace art {
+//add
+extern "C" void dumpArtMethod(ArtMethod* artmethod);
+//add end
 namespace interpreter {
 
 // Short-lived helper class which executes single DEX bytecode.  It is inlined by compiler.
