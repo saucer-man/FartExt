@@ -1,13 +1,25 @@
 # FartExt
-在FART的基础上进行优化并实现更深的主动调用，来实现脱抽取壳。适用AOSP10
 
-本人的测试版本是android 10r2，测试手机是pixel3。如需其他版本，请自行编译。
 
-编译的版本是sailfish  Pixel binaries for Android 10.0.0 (QP1A.191005.007.A1)
+## 编译
+
+源码版本是 QP1A.191005.007	android-10.0.0_r4	安卓10	像素 3a XL、像素 3a、像素 3 XL、像素 3	2019-10-05
+
+将文件都拷贝进去
+
+在build/make/core/tasks/check_boot_jars/package_whitelist.txt添加
+
+```
+####################################
+cn\.mik\.Fartext
+cn\.mik\..*
+cn\..*
+```
+
+m -j4即可
 
 ### 下载
 
-链接: https://pan.baidu.com/s/1lgG8P3H2Q5B6e7rZr58cXw  密码: 033p
 
 ### 使用
 
